@@ -1,22 +1,43 @@
-const GET_COCKTAILS = "COCKTAIL_DB/COCKTAILS/GET_COCKTAILS";
+import {getFilteredDrinks, getFilters} from '../api/api';
 
-const initialState = { drinks: {} , filter: "Ordinary Drink"};
+const FETCH_DRINKS = "DRINK_DB/DRINKS/FETCH_DRINKS";
+const FETCH_FILTERS = "DRINK_DB/DRINKS/FETCH_FILTERS";
+const SET_FILTER = "DRINK_DB/DRINKS/SET_FILTER";
 
-const cocktailReducer = (state = initialState, action) => {
+const initialState = { drinks: [],filters:[], filter: "Ordinary Drink" };
+
+export const drinkReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_COCKTAILS:
-      return { ...state, drinks: action.drinks };
+    case FETCH_DRINKS:
+      return { ...state, drinks: [...action.drinks] };
+    case FETCH_FILTERS:
+      return { ...state, filters: [...action.drinks] };
+    case SET_FILTER:
+      return { ...state, filter: action.filter };
     default:
       return state;
   }
 };
 
-const setCocktails = (drinks) => ({
-  type:GET_COCKTAILS, action: {drinks}
-})
+const setDrinks = (drinks) => ({
+  type: FETCH_DRINKS,
+  drinks: [...drinks],
+});
+const setFilters = (filters) => ({
+  type: FETCH_FILTERS,
+  filters
+});
+const changeFilter = (filter) => ({
+  type: SET_FILTER,
+  filter
+});
 
-const fetchCocktails = (filter="Ordinary Drink") => async dispatch => {
-  const {drinks} = await getFilteredCocktails(filter)
-  dispatch(setCocktails(drinks))
+export const fetchDrinks = () => async (dispatch, getState) => {
+  const { data } = await getFilteredDrinks(getState().Drinks.filter);
+  dispatch(setDrinks(data.drinks));
+};
 
-}
+export const fetchFilters = () => async (dispatch) => {
+  const { data } = await getFilters();
+  dispatch(setFilters(data.drinks));
+};
