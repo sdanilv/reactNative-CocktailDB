@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 
+
 const Drink = ({ idDrink, strDrinkThumb, strDrink }) => (
+
   <View style={styles.drink}>
     <Image
       style={styles.drinkImg}
@@ -11,6 +13,7 @@ const Drink = ({ idDrink, strDrinkThumb, strDrink }) => (
     />
     <Text style={styles.text}>{strDrink}</Text>
   </View>
+
 );
 
 export default Drink;

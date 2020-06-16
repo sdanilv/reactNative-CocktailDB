@@ -3,17 +3,21 @@ import {getFilteredDrinks, getFilters} from '../api/api';
 const FETCH_DRINKS = "DRINK_DB/DRINKS/FETCH_DRINKS";
 const FETCH_FILTERS = "DRINK_DB/DRINKS/FETCH_FILTERS";
 const SET_FILTER = "DRINK_DB/DRINKS/SET_FILTER";
+const FILTER_TOGGLE = "DRINK_DB/DRINKS/FILTER_TOGGLE";
 
-const initialState = { drinks: [],filters:[], filter: "Ordinary Drink" };
+
+const initialState = {openFilters:false,  drinks: [],filters:[], filter: "Ordinary Drink" };
 
 export const drinkReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DRINKS:
       return { ...state, drinks: [...action.drinks] };
     case FETCH_FILTERS:
-      return { ...state, filters: [...action.drinks] };
+      return { ...state, filters: [...action.filters] };
     case SET_FILTER:
       return { ...state, filter: action.filter };
+      case FILTER_TOGGLE:
+      return { ...state, openFilters:!state.openFilter };
     default:
       return state;
   }
@@ -30,6 +34,9 @@ const setFilters = (filters) => ({
 const changeFilter = (filter) => ({
   type: SET_FILTER,
   filter
+});
+const toggleFiltersMenu = () => ({
+  type: FILTER_TOGGLE
 });
 
 export const fetchDrinks = () => async (dispatch, getState) => {
