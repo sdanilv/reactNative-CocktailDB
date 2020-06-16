@@ -14,4 +14,16 @@ export const styles = StyleSheet.create({
   filterIcon: {
     marginRight: 20,
   },
+  end: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  endText: {
+    color: "#FF7F50",
+    fontFamily: "Roboto",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 20,
+    padding: 20,
+  },
 });

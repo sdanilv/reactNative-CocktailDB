@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
+import React from "react";
+import { Text, TouchableNativeFeedback, View } from "react-native";
 import { Icon } from "react-native-elements";
-import {styles} from './Filter.styles';
+import { styles } from "./Filter.styles";
 
 const Filter = ({ filter, checked, setChecked }) => {
   const filterCheckHandler = () => {
@@ -21,6 +21,5 @@ const Filter = ({ filter, checked, setChecked }) => {
     </TouchableNativeFeedback>
   );
 };
-
 
 export default Filter;

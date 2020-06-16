@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Text, TouchableNativeFeedback, View } from "react-native";
 import { setCheckedFilters } from "../../reduce/DrinksReducer";
 import Filter from "./Filter/Filter";
-import {styles} from "./Filters.styles";
+import { styles } from "./Filters.styles";
 
 const Filters = ({
   filters,
