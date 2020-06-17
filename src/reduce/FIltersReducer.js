@@ -1,5 +1,5 @@
 import { getFilters } from "../api/api";
-import { clearDrinks, fetchDrinks, setSectionCountAC } from "./DrinksReducer";
+import { clearDrinks, fetchDrinks } from "./DrinksReducer";
 
 const FETCH_FILTERS = "DRINK_DB/DRINKS/FETCH_FILTERS";
 const SET_CHECKED_FILTER = "DRINK_DB/DRINKS/SET_FILTER";
@@ -34,7 +34,6 @@ export const setCheckedFilters = (filters) => (dispatch) => {
   dispatch(setCheckedFiltersAC(filters));
   dispatch(clearDrinks());
   dispatch(fetchDrinks());
-  dispatch(setSectionCountAC(0));
 };
 
 export const fetchFilters = () => async (dispatch) => {

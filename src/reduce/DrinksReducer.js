@@ -14,7 +14,7 @@ export const drinkReducer = (state = initialState, action) => {
     case FETCH_DRINKS:
       return { ...state, drinks: [...state.drinks, action.drinks] };
     case CLEAR_DRINKS:
-      return { ...state, drinks: [] };
+      return { ...state, drinks: [], sectionCount: 0 };
     case SET_SECTION_COUNT:
       return { ...state, sectionCount: action.count };
     default:
