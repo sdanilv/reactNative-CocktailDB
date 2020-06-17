@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ScrollView, Text, TouchableNativeFeedback, View } from "react-native";
-import { setCheckedFilters } from "../../reduce/DrinksReducer";
 import Filter from "./Filter/Filter";
 import { styles } from "./Filters.styles";
+import {setCheckedFilters} from "../../reduce/FIltersReducer";
 
 const Filters = ({
   filters,
@@ -44,8 +44,8 @@ const Filters = ({
 };
 
 const mapStateToProps = (state) => ({
-  filters: state.Drinks.filters,
-  checkedFilters: state.Drinks.checkedFilters,
+  filters: state.Filters.filters,
+  checkedFilters: state.Filters.checkedFilters,
 });
 
 export default connect(mapStateToProps, { setCheckedFilters })(Filters);

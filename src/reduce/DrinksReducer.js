@@ -1,17 +1,12 @@
-import { getFilteredDrinks, getFilters } from "../api/api";
+import { getFilteredDrinks } from "../api/api";
 
 const FETCH_DRINKS = "DRINK_DB/DRINKS/FETCH_DRINKS";
-const FETCH_FILTERS = "DRINK_DB/DRINKS/FETCH_FILTERS";
-const SET_CHECKED_FILTER = "DRINK_DB/DRINKS/SET_FILTER";
 const SET_SECTION_COUNT = "DRINK_DB/DRINKS/SET_SECTION_COUNT";
 const CLEAR_DRINKS = "DRINK_DB/DRINKS/CLEAR_DRINKS";
 
 const initialState = {
   sectionCount: 0,
-  openFilters: false,
   drinks: [],
-  filters: [],
-  checkedFilters: [],
 };
 
 export const drinkReducer = (state = initialState, action) => {
@@ -20,10 +15,6 @@ export const drinkReducer = (state = initialState, action) => {
       return { ...state, drinks: [...state.drinks, action.drinks] };
     case CLEAR_DRINKS:
       return { ...state, drinks: [] };
-    case FETCH_FILTERS:
-      return { ...state, filters: action.filters };
-    case SET_CHECKED_FILTER:
-      return { ...state, checkedFilters: [...action.filters] };
     case SET_SECTION_COUNT:
       return { ...state, sectionCount: action.count };
     default:
@@ -35,49 +26,28 @@ const addDrinks = (drinks) => ({
   type: FETCH_DRINKS,
   drinks,
 });
-const clearDrinks = () => ({
+export const clearDrinks = () => ({
   type: CLEAR_DRINKS,
 });
 
-const setFilters = (filters) => ({
-  type: FETCH_FILTERS,
-  filters,
-});
-export const setCheckedFiltersAC = (filters) => ({
-  type: SET_CHECKED_FILTER,
-  filters,
-});
 export const setSectionCountAC = (count) => ({
   type: SET_SECTION_COUNT,
   count,
 });
 
 export const loadNextSection = () => async (dispatch, getState) => {
-  const { Drinks } = getState();
+  const { Drinks, Filters } = getState();
   const count = ++Drinks.sectionCount;
-  if (count >= Drinks.checkedFilters.length) return true;
+  if (count >= Filters.checkedFilters.length) return true;
   dispatch(setSectionCountAC(count));
   await dispatch(fetchDrinks());
   return false;
 };
-export const setCheckedFilters = (filters) => (dispatch) => {
-  dispatch(setCheckedFiltersAC(filters));
-  dispatch(clearDrinks());
-  dispatch(fetchDrinks());
-  dispatch(setSectionCountAC(0));
-};
+
 export const fetchDrinks = () => async (dispatch, getState) => {
-  const { Drinks } = getState();
+  const { Drinks, Filters } = getState();
   const count = Drinks.sectionCount;
-  const filter = Drinks.checkedFilters[count];
+  const filter = Filters.checkedFilters[count];
   const { data } = await getFilteredDrinks(filter);
-
   dispatch(addDrinks({ filter, data: data.drinks }));
-};
-
-export const fetchFilters = () => async (dispatch) => {
-  const { data } = await getFilters();
-  const filters = data.drinks.map((item) => item.strCategory);
-  dispatch(setFilters(filters));
-  dispatch(setCheckedFilters(filters));
 };

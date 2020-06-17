@@ -8,9 +8,10 @@ import {
   View,
 } from "react-native";
 import { Icon } from "react-native-elements";
-import { fetchFilters, loadNextSection } from "../../reduce/DrinksReducer";
+import { loadNextSection } from "../../reduce/DrinksReducer";
 import Drink from "./Drink/Drink";
 import { styles } from "./Drinks.styles";
+import { fetchFilters } from "../../reduce/FIltersReducer";
 
 const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
   const pressFiltersHandler = () => navigation.navigate("Filters");
