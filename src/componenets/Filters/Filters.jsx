@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Text, TouchableNativeFeedback, View } from "react-native";
+import { ScrollView, Text, TouchableNativeFeedback, View } from "react-native";
 import { setCheckedFilters } from "../../reduce/DrinksReducer";
 import Filter from "./Filter/Filter";
 import { styles } from "./Filters.styles";
@@ -12,9 +12,11 @@ const Filters = ({
   navigation,
 }) => {
   const [checked, setChecked] = useState([]);
+
   useEffect(() => {
     setChecked(checkedFilters);
   }, [checkedFilters]);
+
   const applyHandler = () => {
     setCheckedFilters(checked);
     navigation.goBack();
@@ -22,14 +24,16 @@ const Filters = ({
 
   return (
     <View style={styles.filters}>
-      {filters.map((filter) => (
-        <Filter
-          key={filter}
-          filter={filter}
-          checked={checked}
-          setChecked={setChecked}
-        />
-      ))}
+      <ScrollView >
+        {filters.map((filter) => (
+          <Filter
+            key={filter}
+            filter={filter}
+            checked={checked}
+            setChecked={setChecked}
+          />
+        ))}
+      </ScrollView>
       <TouchableNativeFeedback onPress={applyHandler}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>APPLY</Text>

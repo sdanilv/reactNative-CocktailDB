@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   filters: {
     flex: 1,
     backgroundColor: "#E5E5E5",
-    justifyContent: "space-around",
   },
   button: {
     alignSelf: "center",
@@ -17,5 +16,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  buttonText: { color: "white", fontSize: 16, lineHeight: 19, height: 19 },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    lineHeight: 19,
+    height: 19,
+  },
 });

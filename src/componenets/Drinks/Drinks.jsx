@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import {
   ActivityIndicator,
   SectionList,
@@ -6,10 +7,9 @@ import {
   TouchableNativeFeedback,
   View,
 } from "react-native";
-import { connect } from "react-redux";
+import { Icon } from "react-native-elements";
 import { fetchFilters, loadNextSection } from "../../reduce/DrinksReducer";
 import Drink from "./Drink/Drink";
-import { Icon } from "react-native-elements";
 import { styles } from "./Drinks.styles";
 
 const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {

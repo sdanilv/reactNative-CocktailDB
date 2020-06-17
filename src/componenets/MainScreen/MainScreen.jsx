@@ -1,9 +1,9 @@
 import React from "react";
-import Drinks from "../Drinks/Drinks";
 import { Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Drinks from "../Drinks/Drinks";
 import Filters from "../Filters/Filters";
 import { styles } from "./MainScreen.styles";
-import { createStackNavigator } from "@react-navigation/stack";
 
 const RootStack = createStackNavigator();
 
