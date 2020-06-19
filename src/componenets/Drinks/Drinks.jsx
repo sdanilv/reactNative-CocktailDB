@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
-  ActivityIndicator,
+  RefreshControl,
   SectionList,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Icon } from "react-native-elements";
@@ -13,20 +13,25 @@ import Drink from "./Drink/Drink";
 import { styles } from "./Drinks.styles";
 import { fetchFilters } from "../../reduce/FIltersReducer";
 
+const mapStateToProps = (state) => ({
+  drinks: state.Drinks.drinks,
+});
+
 const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
   const pressFiltersHandler = () => navigation.navigate("Filters");
   const [loading, setLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableNativeFeedback onPress={pressFiltersHandler}>
+        <TouchableOpacity activeOpacity={0.3} onPress={pressFiltersHandler}>
           <Icon
             name="filter"
             type="material-community"
             style={styles.filterIcon}
           />
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       ),
     });
   }, [navigation]);
@@ -35,45 +40,36 @@ const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
     fetchFilters();
   }, [fetchFilters]);
 
+  const onEndReachedHandler = () => {
+    setLoading(true);
+    loadNextSection().then((data) => {
+      setIsEnd(data);
+      setLoading(false);
+    });
+  };
+  const renderSectionFooterCallback = () =>
+    isEnd && (
+      <View style={styles.end}>
+        <Text style={styles.endText}>You have reached the end</Text>
+      </View>
+    );
   return (
     <View>
       <SectionList
         sections={drinks}
-        keyExtractor={(item) => item.idDrink}
+        keyExtractor={({ idDrink }) => idDrink}
         renderItem={({ item }) => <Drink {...item} />}
         renderSectionHeader={({ section: { filter } }) => (
           <Text style={styles.drinksHeader}>{filter}</Text>
         )}
-        onEndReached={() => {
-          setLoading(true);
-          loadNextSection().then((data) => {
-            setIsEnd(data);
-            setLoading(false);
-          });
-        }}
-        renderSectionFooter={() => {
-          if (isEnd)
-            return (
-              <View style={styles.end}>
-                <Text style={styles.endText}>You have reached the end</Text>
-              </View>
-            );
-          if (loading)
-            return (
-              <View style={styles.loader}>
-                <ActivityIndicator size="large" color="#0000ff" />
-              </View>
-            );
-        }}
+        onEndReached={onEndReachedHandler}
+        renderSectionFooter={renderSectionFooterCallback}
+        refreshControl={<RefreshControl refreshing={loading} />}
         stickySectionHeadersEnabled
       />
     </View>
   );
 };
-
-const mapStateToProps = (state) => ({
-  drinks: state.Drinks.drinks,
-});
 
 export default connect(mapStateToProps, { fetchFilters, loadNextSection })(
   Drinks

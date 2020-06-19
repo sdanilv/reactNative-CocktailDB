@@ -48,6 +48,7 @@ export const fetchDrinks = () => async (dispatch, getState) => {
   const { Drinks, Filters } = getState();
   const count = Drinks.sectionCount;
   const filter = Filters.checkedFilters[count];
+  if(!filter) return ;
   const { data } = await getFilteredDrinks(filter);
   dispatch(addDrinks({ filter, data: data.drinks }));
 };
