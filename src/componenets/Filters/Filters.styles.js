@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  check:{
+    marginRight:65
+  },
   filters: {
     flex: 1,
     backgroundColor: "#E5E5E5",
@@ -20,6 +23,6 @@ export const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     lineHeight: 19,
-    height: 19,
+    height: 25,
   },
 });

@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import {ScrollView, Text, TouchableNativeFeedback, TouchableOpacity, View} from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Filter from "./Filter/Filter";
 import { styles } from "./Filters.styles";
-import {setCheckedFilters} from "../../reduce/FIltersReducer";
-import {Icon} from "react-native-elements";
+import { setCheckedFilters } from "../../reduce/FIltersReducer";
+import { Icon } from "react-native-elements";
 
 const Filters = ({
   filters,
@@ -13,23 +19,21 @@ const Filters = ({
   navigation,
 }) => {
   const [checked, setChecked] = useState([]);
-
-  const checkAllHandler = ()=>{
-    console.log(checked.length?[]:filters);
-    setChecked(checked.length?filters:[])};
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-          <TouchableOpacity activeOpacity={0.3} onPress={checkAllHandler}>
-            <Icon style={styles.check} type="material" name="done" />
-          </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
-
   useEffect(() => {
     setChecked(checkedFilters);
   }, [checkedFilters]);
+
+  const checkAllHandler = () =>
+    setChecked((state) => (state.length ? [] : filters));
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity activeOpacity={0.3} onPress={checkAllHandler}>
+          <Icon style={styles.check} type="material" name="done" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   const applyHandler = () => {
     setCheckedFilters(checked);
@@ -38,7 +42,7 @@ const Filters = ({
 
   return (
     <View style={styles.filters}>
-      <ScrollView >
+      <ScrollView>
         {filters.map((filter) => (
           <Filter
             key={filter}
