@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { textStyle } from "../../../styles/Text";
+import { textStyle } from "styles/Text";
 
 import { styles } from "./Drink.styles";
 

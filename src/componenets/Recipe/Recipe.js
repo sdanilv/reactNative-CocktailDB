@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { textStyle } from "../../styles/Text";
+import { textStyle } from "styles/Text";
 import Ingredients from "./Ingredients/Ingredients";
 import { styles } from "./Recipe.styles";
 
@@ -13,6 +13,7 @@ const Recipe = ({ recipe, navigation }) => {
   }, [navigation, recipe]);
   if (!recipe.idDrink) return <View />;
   return (
+
     <ScrollView>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Image

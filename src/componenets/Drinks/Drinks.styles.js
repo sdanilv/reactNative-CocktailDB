@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { textStyle } from "../../styles/Text";
+import { textStyle } from "styles/Text";
 
 export const styles = StyleSheet.create({
   drinksHeader: {

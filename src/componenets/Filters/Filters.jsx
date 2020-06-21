@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
-import { setCheckedFilters } from "../../reduce/FIltersReducer";
-import { textStyle } from "../../styles/Text";
+import { setCheckedFilters } from "reduce/FIltersReducer";
+import { textStyle } from "styles/Text";
 import Filter from "./Filter/Filter";
 import { styles } from "./Filters.styles";
 
@@ -23,6 +23,7 @@ const Filters = ({
   useEffect(() => {
     setChecked(checkedFilters);
   }, [checkedFilters]);
+
 
   const checkAllHandler = () =>
     setChecked((state) => (state.length ? [] : filters));

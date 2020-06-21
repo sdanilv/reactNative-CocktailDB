@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TouchableNativeFeedback, View } from "react-native";
 import { Icon } from "react-native-elements";
-import { textStyle } from "../../../styles/Text";
+import { textStyle } from "styles/Text";
 import { styles } from "./Filter.styles";
 
 const Filter = ({ filter, checked, setChecked }) => {

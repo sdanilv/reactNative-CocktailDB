@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
-import { loadNextSection } from "../../reduce/DrinksReducer";
-import { fetchFilters } from "../../reduce/FIltersReducer";
-import { fetchRecipe } from "../../reduce/RecipeReducer";
-import { textStyle } from "../../styles/Text";
+import { textStyle } from "styles/Text";
+import { loadNextSection } from "reduce/DrinksReducer";
+import { fetchFilters } from "reduce/FIltersReducer";
+import { fetchRecipe } from "reduce/RecipeReducer";
 import Drink from "./Drink/Drink";
 import { styles } from "./Drinks.styles";
 
