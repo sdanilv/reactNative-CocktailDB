@@ -1,5 +1,5 @@
-import { getFilteredDrinks } from "../api/api";
 import { createSlice } from "@reduxjs/toolkit";
+import { getFilteredDrinks } from "../api/api";
 
 const initialState = {
   sectionCount: 0,
@@ -22,11 +22,13 @@ const drinksReducer = createSlice({
     },
   },
 });
+
 export const {
   addDrinks,
   clearDrinks,
   setSectionCountAC,
 } = drinksReducer.actions;
+
 export const loadNextSection = () => async (dispatch, getState) => {
   const { Drinks, Filters } = getState();
   const count = ++Drinks.sectionCount;
@@ -40,7 +42,7 @@ export const fetchDrinks = () => async (dispatch, getState) => {
   const { Drinks, Filters } = getState();
   const count = Drinks.sectionCount;
   const filter = Filters.checkedFilters[count];
-  if(!filter) return ;
+  if (!filter) return;
   const { data } = await getFilteredDrinks(filter);
   dispatch(addDrinks({ filter, data: data.drinks }));
 };

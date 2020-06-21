@@ -1,28 +1,25 @@
 import { StyleSheet } from "react-native";
+import { textStyle } from "../../styles/Text";
 
 export const styles = StyleSheet.create({
-  check:{
-    marginRight:65
+  check: {
+    marginRight: 65,
   },
   filters: {
     flex: 1,
     backgroundColor: "#E5E5E5",
   },
   button: {
+    alignItems: "center",
+    justifyContent: "center",
     alignSelf: "center",
     backgroundColor: "#272727",
-    textAlign: "center",
-    paddingVertical: "auto",
     width: 260,
     height: 53,
     margin: 27,
-    alignItems: "center",
-    justifyContent: "center",
   },
   buttonText: {
+    ...textStyle.text,
     color: "white",
-    fontSize: 16,
-    lineHeight: 19,
-    height: 25,
   },
 });

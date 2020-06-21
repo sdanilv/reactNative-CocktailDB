@@ -1,18 +1,22 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { textStyle } from "../../../styles/Text";
+
 import { styles } from "./Drink.styles";
 
-const Drink = ({ strDrinkThumb, strDrink }) => {
+const Drink = ({ strDrinkThumb, strDrink, goToRecipe, idDrink }) => {
   return (
-    <View style={styles.drink}>
-      <Image
-        style={styles.drinkImg}
-        source={{
-          uri: strDrinkThumb,
-        }}
-      />
-      <Text style={styles.text}>{strDrink}</Text>
-    </View>
+    <TouchableOpacity onPress={() => goToRecipe(idDrink)}>
+      <View style={styles.drink}>
+        <Image
+          style={styles.drinkImg}
+          source={{
+            uri: strDrinkThumb,
+          }}
+        />
+        <Text style={textStyle.text}>{strDrink}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

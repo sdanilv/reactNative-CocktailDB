@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   Text,
@@ -7,10 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Icon } from "react-native-elements";
+import { connect } from "react-redux";
+import { setCheckedFilters } from "../../reduce/FIltersReducer";
+import { textStyle } from "../../styles/Text";
 import Filter from "./Filter/Filter";
 import { styles } from "./Filters.styles";
-import { setCheckedFilters } from "../../reduce/FIltersReducer";
-import { Icon } from "react-native-elements";
 
 const Filters = ({
   filters,
@@ -27,6 +28,7 @@ const Filters = ({
     setChecked((state) => (state.length ? [] : filters));
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerTitle: () => <Text style={textStyle.title}>Filters</Text>,
       headerRight: () => (
         <TouchableOpacity activeOpacity={0.3} onPress={checkAllHandler}>
           <Icon style={styles.check} type="material" name="done" />

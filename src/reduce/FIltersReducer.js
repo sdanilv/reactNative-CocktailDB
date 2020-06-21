@@ -1,6 +1,6 @@
-import { getFilters } from "../api/api";
-import { clearDrinks, fetchDrinks } from "./DrinksReducer";
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
+import {getFilters} from '../api/api';
+import {clearDrinks, fetchDrinks} from './DrinksReducer';
 
 const initialState = {
   filters: [],
@@ -13,9 +13,10 @@ const filtersReducer = createSlice({
   reducers: {
     setFilters(state, action) {
       state.filters = action.payload;
+      state.checkedFilters = action.payload;
     },
     setCheckedFiltersAC(state, action) {
-      state.checkedFilters = [...action.payload];
+      state.checkedFilters = action.payload;
     },
   },
 });

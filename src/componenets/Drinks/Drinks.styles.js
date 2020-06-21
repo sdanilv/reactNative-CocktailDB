@@ -1,15 +1,12 @@
 import { StyleSheet } from "react-native";
+import { textStyle } from "../../styles/Text";
 
 export const styles = StyleSheet.create({
   drinksHeader: {
+    ...textStyle.text,
     marginLeft: 20,
     margin: 20,
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "normal",
     fontSize: 14,
-    lineHeight: 16,
-    color: "#7E7E7E",
   },
   filterIcon: {
     marginRight: 20,
@@ -19,10 +16,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   endText: {
+    ...textStyle.text,
     color: "#FF7F50",
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "normal",
     fontSize: 20,
     padding: 20,
   },

@@ -10,12 +10,4 @@ export const styles = StyleSheet.create({
   check: {
     marginRight: 35,
   },
-  filterText: {
-    lineHeight: 19,
-    color: "#7E7E7E",
-    fontSize: 16,
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "normal",
-  },
 });

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import {
   RefreshControl,
   SectionList,
@@ -8,24 +7,38 @@ import {
   View,
 } from "react-native";
 import { Icon } from "react-native-elements";
+import { connect } from "react-redux";
 import { loadNextSection } from "../../reduce/DrinksReducer";
+import { fetchFilters } from "../../reduce/FIltersReducer";
+import { fetchRecipe } from "../../reduce/RecipeReducer";
+import { textStyle } from "../../styles/Text";
 import Drink from "./Drink/Drink";
 import { styles } from "./Drinks.styles";
-import { fetchFilters } from "../../reduce/FIltersReducer";
 
 const mapStateToProps = (state) => ({
   drinks: state.Drinks.drinks,
 });
 
-const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
-  const pressFiltersHandler = () => navigation.navigate("Filters");
+const Drinks = ({
+  navigation,
+  fetchFilters,
+  fetchRecipe,
+  drinks,
+  loadNextSection,
+}) => {
   const [loading, setLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
+  const goToFilters = () => navigation.navigate("Filters");
+  const goToRecipe = (id) => {
+    fetchRecipe(id);
+    navigation.navigate("Recipe");
+  };
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerTitle: () => <Text style={textStyle.title}>Drinks</Text>,
       headerRight: () => (
-        <TouchableOpacity activeOpacity={0.3} onPress={pressFiltersHandler}>
+        <TouchableOpacity activeOpacity={0.3} onPress={goToFilters}>
           <Icon
             name="filter"
             type="material-community"
@@ -58,7 +71,7 @@ const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
       <SectionList
         sections={drinks}
         keyExtractor={({ idDrink }) => idDrink}
-        renderItem={({ item }) => <Drink {...item} />}
+        renderItem={({ item }) => <Drink goToRecipe={goToRecipe} {...item} />}
         renderSectionHeader={({ section: { filter } }) => (
           <Text style={styles.drinksHeader}>{filter}</Text>
         )}
@@ -71,6 +84,8 @@ const Drinks = ({ navigation, fetchFilters, drinks, loadNextSection }) => {
   );
 };
 
-export default connect(mapStateToProps, { fetchFilters, loadNextSection })(
-  Drinks
-);
+export default connect(mapStateToProps, {
+  fetchFilters,
+  fetchRecipe,
+  loadNextSection,
+})(Drinks);

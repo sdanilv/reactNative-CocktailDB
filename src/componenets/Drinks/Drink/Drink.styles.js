@@ -11,11 +11,4 @@ export const styles = StyleSheet.create({
     height: 100,
     width: 101,
   },
-  drinkName: {
-    height: 19,
-    fontFamily: "Roboto",
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#7E7E7E",
-  },
 });
